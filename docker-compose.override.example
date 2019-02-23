@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    php:
+        build:
+            args:
+                - INSTALL_XDEBUG=false
+                - INSTALL_OPCACHE=false
+
+    maildev:
+        container_name: ${CONTAINER_PREFIX}.mail
+        image: djfarrelly/maildev
+        env_file: .env
+        ports:
+            - "${MAIL_INTERFACE_PORT}:80"
+            - "${MAIL_PORT}:25"
+        networks:
+            - whytowork
+
